@@ -9,7 +9,6 @@ import useMutation from '@libs/client/useMutation';
 import { cls } from '@libs/client/utils';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-
 interface AnswerWithUser extends Answer {
   user: User;
 }
@@ -26,16 +25,13 @@ interface CommunityPostResponse {
   post: PostWithUser;
   isWondering: boolean;
 }
-
 interface AnswerForm {
   answer: string;
 }
-
 interface AnswerResponse {
   ok: boolean;
   response: Answer;
 }
-
 const CommunityPostDetail: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<AnswerForm>();
@@ -76,8 +72,9 @@ const CommunityPostDetail: NextPage = () => {
   useEffect(() => {
     if (answerData && answerData.ok) {
       reset();
+      mutate();
     }
-  }, [answerData, reset]);
+  }, [answerData, reset, mutate]);
   return (
     <Layout canGoBack>
       <div>
