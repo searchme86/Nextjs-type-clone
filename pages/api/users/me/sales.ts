@@ -9,7 +9,7 @@ async function handler(
   const {
     session: { user },
   } = req;
-  const favs = await client.fav.findMany({
+  const sales = await client.sale.findMany({
     where: {
       userId: user?.id,
     },
@@ -27,7 +27,7 @@ async function handler(
   });
   res.json({
     ok: true,
-    favs,
+    sales,
   });
 }
 export default withApiSession(
