@@ -9,7 +9,6 @@ datasource db {
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
-
 model User {
   id              Int         @id @default(autoincrement())
   phone           String?     @unique
@@ -30,7 +29,6 @@ model User {
   purchases       Purchase[]
   record          Record[]
 }
-
 model Token {
   id        Int      @id @default(autoincrement())
   payload   String   @unique
@@ -39,7 +37,6 @@ model Token {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Product {
   id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now())
@@ -51,11 +48,10 @@ model Product {
   price       Int
   description String     @db.MediumText
   favs        Fav[]
-   sales       Sale[]
+  sales       Sale[]
   purchases   Purchase[]
   records     Record[]
 }
-
 model Post {
   id        Int         @id @default(autoincrement())
   createdAt DateTime    @default(now())
@@ -87,7 +83,6 @@ model Wondering {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
 }
-
 model Review {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
@@ -97,9 +92,8 @@ model Review {
   createdById  Int
   createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
   createdForId Int
-  score         Int  @default(1)
+  score        Int      @default(1)
 }
-
 model Sale {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -109,7 +103,6 @@ model Sale {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Purchase {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -119,7 +112,6 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Fav {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -129,7 +121,6 @@ model Fav {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Record {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -137,7 +128,7 @@ model Record {
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
   createdAt DateTime @default(now())
-  kind      Kind
+    kind      String
   updatedAt DateTime @updatedAt
 }
 
